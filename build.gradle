@@ -1,0 +1,33 @@
+buildscript { // 프로젝트의 플러그인 의존성 관리를 위한 설정
+    ext {  //ext: 전역변수 생성, 설정
+        springBootVersion = '2.1.7.RELEASE' // spring-boot-gradle-plugin라는 스프링 부트 그레이들을 플러그인의 2.1.7.RELEASE를 의존성으로 받겠다
+    }
+    repositories { //각종 의존성(라이브러리)들을 어떤 원격 저장소에서 받을 지 설정
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' //스프링부트의 의존성들을 관리해주는 플러그인! 꼭 추가!!
+
+group 'com.yoonkyeong.webservice'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies { //개발에 필요한 의존성들을 선언하는 곳
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    testImplementation('org.springframework.boot:spring-boot-starter-test')
+}
+
+test {
+    useJUnitPlatform()
+}
